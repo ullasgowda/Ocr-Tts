@@ -1,5 +1,7 @@
-const ocrHelper = require('../../helper/ocr'),
-    ttsHelper = require('../../helper/tts'),
+require('rootpath')();
+
+const ocrHelper = require('helper/ocr'),
+    ttsHelper = require('helper/tts'),
     express = require('express'),
     router = express.Router(),
     Gtts = require('gtts');

@@ -1,7 +1,8 @@
+require('rootpath')();
+
 const express = require('express'),
     bodyParser = require('body-parser'),
-    v1ApiRoutes = require('./routes/v1/api');
-    
+    v1ApiRoutes = require('routes/v1/api');
     require('dotenv').config();
     
     const app = express();
