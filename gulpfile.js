@@ -7,7 +7,7 @@ require('rootpath')();
 const gulp = require('gulp'),
     nodemon = require('gulp-nodemon'),
     pkg = require('package.json'),
-    pm2 = require('pm2');
+    pm2 = require('lib/pm2');
 
 
 const startServer = (next) => {
