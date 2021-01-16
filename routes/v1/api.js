@@ -8,7 +8,7 @@ const ocrHelper = require('helper/ocr'),
 
 router.get('/convert', async (req, res, next) => {
     try {
-         console.log("Get request to convert!");
+        console.log("Get request to convert!");
 
         let imagePath = req.query.src;
         const text = await ocrHelper.ocr(imagePath),
@@ -27,7 +27,6 @@ router.get('/convert', async (req, res, next) => {
 router.post('/convert', async (req, res, next) => {
     try {
         console.log("Post request to convert!");
-
         let data = req.body,
             type = data.type,
             text = data.text;
