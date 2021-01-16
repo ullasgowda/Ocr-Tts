@@ -14,6 +14,7 @@ const express = require('express'),
       next();
     });
     
+    console.log("Index!");
     app.use(bodyParser.json());
     app.use(express.static('public'));
     app.use('/images', express.static(__dirname + '/Images'));
