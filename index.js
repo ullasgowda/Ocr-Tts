@@ -22,9 +22,22 @@ const express = require('express'),
 
     app.use('/api/v1', v1ApiRoutes);
     
-    app.use((req, res, next) => {
-      res.send('Welcome to Express');
-    });
+    app.get("/", (req, res,next) => {
+        res.status(200).json({
+          msg: 'success'
+        })
+      })
+      
+      app.get("/home", (req, res,next) => {
+        res.status(200).json({
+          msg: 'home'
+        })
+      })
+
+      
+    // app.use((req, res, next) => {
+    //   res.send('Welcome to Express');
+    // });
     
     app.use((err, req, res, next) => {
       res.send({code: 401, message: err.toString()});
