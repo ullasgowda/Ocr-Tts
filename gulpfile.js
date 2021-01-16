@@ -11,7 +11,7 @@ const gulp = require('gulp'),
 
 
 const startServer = (next) => {
-    if(process.env.NODE_ENV === process.env.production){
+    if(process.env.NODE_ENV === 'PRODUCTION'){
         Promise.resolve()
             .then( () => {
                 return pm2.connect();
