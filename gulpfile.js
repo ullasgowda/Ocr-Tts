@@ -11,20 +11,44 @@ const gulp = require('gulp'),
 
 
 const startServer = (next) => {
-    // @todo : write the same for prod
-    nodemon({
-        script: 'index.js',
-        ext: 'js',
-        verbose: true,
-        ignore: [
-            'gulpfile.js',
-            'node_modules/*'
-        ],
-        env: {
-            'NODE_ENV': 'development'
-        },
-        done: next
-    })
+    if(process.env.NODE_ENV === process.env.production){
+        Promise.resolve()
+            .then( () => {
+                return pm2.connect();
+            })
+            .then( () => {
+                return pm2.start({
+                    script: 'index.js',
+                    name: process.env.NAME || pkg.name,
+                    exec_mode: 'cluster',
+                    instances: process.env.PM2_INSTANCES || 1
+                });
+            })
+            .then( () => {
+                return pm2.disconnect();
+            })
+            .then( () => {
+                return next();
+            })
+            .catch(err => {
+                pm2.disconnect();
+                return next(err);
+            });
+    }else{
+        nodemon({
+            script: 'index.js',
+            ext: 'js',
+            verbose: true,
+            ignore: [
+                'gulpfile.js',
+                'node_modules/*'
+            ],
+            env: {
+                'NODE_ENV': 'development'
+            },
+            done: next
+        })
+    }
 }
 
 const stopServer = (next) => {
